@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Please Maan Jao Na Yaar! 🥺❤️</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #260a2b 0%, #0a0210 100%);
+      min-height: 100vh;
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* FLOATING EMOJIS */
+    .bg-emoji-floater {
+      position: fixed;
+      bottom: -60px;
+      font-size: 28px;
+      user-select: none;
+      z-index: 1;
+      pointer-events: none;
+      animation: floatUpSlow linear forwards;
+    }
+
+    @keyframes floatUpSlow {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 0.75;
+      }
+
+      85% {
+        opacity: 0.75;
+      }
+
+      100% {
+        transform: translateY(-115vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* SCREEN ONE */
+    #screen-one {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      z-index: 10;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .trap-box {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 30px;
+      padding: 50px 30px;
+      text-align: center;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    .trap-emoji {
+      font-size: 75px;
+      animation: sadBounce 2s infinite;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    @keyframes sadBounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .trap-box h1 {
+      font-size: 28px;
+      color: #ff758c;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .trap-box p {
+      font-size: 15px;
+      color: #dfd0ea;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .dialogue-bubble {
+      min-height: 40px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #ffd166;
+      margin-bottom: 30px;
+      transition: all 0.2s;
+    }
+
+    .btn-arena {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      min-height: 80px;
+      position: relative;
+    }
+
+    .btn-yes {
+      background: linear-gradient(45deg, #00b09b, #96c93d);
+      color: #fff;
+      border: none;
+      padding: 15px 36px;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 176, 155, 0.4);
+      transition: all 0.3s ease;
+      z-index: 5;
+    }
+
+    .btn-yes:hover {
+      box-shadow: 0 12px 35px rgba(0, 176, 155, 0.7);
+    }
+
+    .btn-no {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255, 65, 108, 0.4);
+      position: relative;
+      transition: all 0.15s ease-out;
+      user-select: none;
+      z-index: 4;
+    }
+
+    /* SCREEN TWO */
+    #screen-two {
+      display: none;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 60px 20px 100px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .success-hero {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+      padding: 45px 25px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      margin-bottom: 50px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .hero-title {
+      font-family: 'Caveat', cursive;
+      font-size: 58px;
+      background: linear-gradient(to right, #ff758c, #ff7eb3, #ff007f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      color: #dfd0ea;
+      font-size: 16px;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* DRAMA CARDS */
+    .drama-container {
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      margin-bottom: 60px;
+    }
+
+    .drama-card {
+      background: linear-gradient(
+        135deg,
+        rgba(255, 117, 140, 0.15),
+        rgba(121, 40, 202, 0.2)
+      );
+
+      border: 1px dashed #ff758c;
+      border-radius: 25px;
+      padding: 35px 25px;
+      text-align: center;
+
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+
+      opacity: 0;
+      transform: scale(0.7) translateY(50px);
+
+      transition:
+        all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .drama-card.in-view {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .drama-emoji {
+      font-size: 55px;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .drama-card h3 {
+      font-size: 22px;
+      color: #ff9ecb;
+      margin-bottom: 10px;
+    }
+
+    .drama-card p {
+      font-size: 15px;
+      color: #f3e5f7;
+      line-height: 1.8;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* HEADINGS */
+    .section-heading {
+      text-align: center;
+      font-size: 28px;
+      color: #ff758c;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .section-desc {
+      text-align: center;
+      color: #cfb9dc;
+      font-size: 14px;
+      margin-bottom: 35px;
+    }
+
+    /* REASONS */
+    .reasons-box {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 25px;
+      padding: 35px 25px;
+      margin-bottom: 60px;
+    }
+
+    .reasons-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .reasons-list li {
+      background: rgba(255, 255, 255, 0.08);
+      border-left: 4px solid #ff758c;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #faeafd;
+    }
+
+    /* GALLERY */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(250px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .photo-item {
+      position: relative;
+      background: #ffffff;
+      padding: 14px 14px 22px;
+      border-radius: 18px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: all 0.4s ease;
+      color: #333;
+      text-align: center;
+    }
+
+    .photo-item:first-child {
+      transform: rotate(-2deg);
+    }
+
+    .photo-item:last-child {
+      transform: rotate(2deg);
+    }
+
+    .photo-item:hover {
+      transform: translateY(-12px) rotate(0deg) scale(1.04);
+      box-shadow: 0 25px 50px rgba(255, 117, 140, 0.45);
+      border: 2px solid #ff758c;
+      z-index: 5;
+    }
+
+    .photo-frame {
+      width: 100%;
+      height: 350px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-item:hover .photo-frame img {
+      transform: scale(1.08);
+    }
+
+    .photo-pin {
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      z-index: 2;
+    }
+
+    .photo-caption {
+      margin-top: 14px;
+      font-family: 'Caveat', cursive;
+      font-size: 21px;
+      font-weight: 700;
+      color: #ff007f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .photo-hint {
+      font-size: 11px;
+      color: #777;
+      font-family: 'Poppins', sans-serif;
+      margin-top: 2px;
+    }
+
+    /* MOOD */
+    .meter-box {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px dashed #ffd166;
+      border-radius: 25px;
+      padding: 35px 20px;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .meter-title {
+      color: #ffd166;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .meter-desc {
+      color: #dfd0ea;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .mood-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .mood-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .mood-btn:hover {
+      background: #ff758c;
+      transform: scale(1.05);
+    }
+
+    #moodResult {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #00b09b;
+      min-height: 25px;
+    }
+
+    /* MODAL */
+    #photoModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      z-index: 100;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      max-width: 440px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 25px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+      animation: modalPop 0.4s ease;
+    }
+
+    @keyframes modalPop {
+      from {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .modal-content img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+    }
+
+    .modal-text-wrap {
+      padding: 25px 20px;
+    }
+
+    .modal-text-wrap h3 {
+      color: #ff758c;
+      font-size: 21px;
+      margin-bottom: 8px;
+    }
+
+    .modal-text-wrap p {
+      color: #f1e2f7;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .close-modal-btn {
+      background: linear-gradient(45deg, #ff007f, #ff758c);
+      color: #fff;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(255, 0, 127, 0.4);
+    }
+
+    /* FINAL LETTER */
+    .promise-letter {
+      background: rgba(255, 255, 255, 0.08);
+      border-left: 6px solid #00b09b;
+      border-radius: 20px;
+      padding: 40px 30px;
+      line-height: 2;
+      font-size: 16px;
+      color: #f6e8f8;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .promise-letter strong {
+      color: #00b09b;
+      font-size: 20px;
+    }
+
+    .treat-alert {
+      margin-top: 25px;
+      background: rgba(255, 215, 0, 0.15);
+      border: 1px dashed #ffd166;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      color: #ffe494;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 650px) {
+
+      .trap-box {
+        padding: 40px 20px;
+      }
+
+      .trap-box h1 {
+        font-size: 24px;
+      }
+
+      .hero-title {
+        font-size: 44px;
+      }
+
+      .hero-subtitle {
+        font-size: 14px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-frame {
+        height: 400px;
+      }
+
+      .btn-arena {
+        gap: 12px;
+      }
+
+      .btn-yes {
+        padding: 13px 25px;
+      }
+
+      .btn-no {
+        padding: 12px 22px;
+      }
+
+      .promise-letter {
+        padding: 30px 20px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       SCREEN 1
+  ========================== -->
+
+  <section id="screen-one">
+
+    <div class="trap-box">
+
+      <div class="trap-emoji" id="trapEmoji">🥺</div>
+
+      <h1>
+        Please Gussa Chhod Do Na Yaar!
+      </h1>
+
+      <p>
+        Mujhse sach me bahut badi galti ho gayi.
+        Tum naraz hoti ho to sab kuch bekar lagta hai...
+      </p>
+
+      <div class="dialogue-bubble" id="dialogueText">
+        Kya tum mujhe maaf kar sakti ho? 💔
+      </div>
+
+      <div class="btn-arena">
+
+        <button
+          class="btn-yes"
+          id="yesBtn"
+          onclick="unlockScreenTwo()">
+          Maan Jao ❤️
+        </button>
+
+        <button
+          class="btn-no"
+          id="noBtn"
+          onmouseover="dodgeNo()"
+          onclick="dodgeNo()">
+          Nahi 😡
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SCREEN 2
+  ========================== -->
+
+  <section id="screen-two">
+
+    <div class="success-hero">
+
+      <h2 class="hero-title">
+        Thank You For Forgiving Me! ❤️
+      </h2>
+
+      <p class="hero-subtitle">
+        Mujhe pata tha meri sabse pyaari dost zyada der naraz nahi reh sakti!
+        Ab neeche scroll karte jao, ye poora page tumhare liye sajaya hai... 👇
+      </p>
+
+    </div>
+
+
+    <!-- DRAMA CARDS -->
+
+    <div class="drama-container">
+
+      <div class="drama-card">
+        <span class="drama-emoji">😭🙏</span>
+
+        <h3>
+          Kaan Pakad Ke 100 Baar Sorry!
+        </h3>
+
+        <p>
+          Aage se agar maine tumhe thoda sa bhi tang kiya ya gussa dilaya,
+          to jo saza dogi bina uff kiye manzoor hogi!
+        </p>
+      </div>
+
+
+      <div class="drama-card">
+        <span class="drama-emoji">🌸✨</span>
+
+        <h3>
+          Tumhari Smile Sabse Precious Hai
+        </h3>
+
+        <p>
+          Ye gussa-wussa tumhare chehre par bilkul suit nahi karta.
+          Tum bas aise hi hamesha hasti raha karo,
+          wahi sabse achha lagta hai!
+        </p>
+      </div>
+
+
+      <div class="drama-card">
+        <span class="drama-emoji">🍕🍦</span>
+
+        <h3>
+          Double Treat Ka Pakka Promise!
+        </h3>
+
+        <p>
+          Tumhara favourite pizza, pasta, momos aur ice-cream!
+          Jab bhi tum bologi, jahan bologi, meri taraf se grand treat!
+        </p>
+      </div>
+
+
+      <div class="drama-card">
+        <span class="drama-emoji">🤐🛡️</span>
+
+        <h3>
+          No More Fights Agreement!
+        </h3>
+
+        <p>
+          Agle 30 din tak tum jo bologi wahi final hoga!
+          Main bina argument kiye har baat manunga, done?
+        </p>
+      </div>
+
+
+      <div class="drama-card">
+        <span class="drama-emoji">🤝💖</span>
+
+        <h3>
+          One In A Million Friendship
+        </h3>
+
+        <p>
+          Dost to bahut milte hain par tum jaisi caring aur pagal dost
+          bas ek hi hai. Tumhe khone ka risk nahi le sakta!
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- REASONS -->
+
+    <div class="reasons-box">
+
+      <h3 class="section-heading">
+        4 Reasons Why You Should Smile Right Now ✨
+      </h3>
+
+      <p class="section-desc">
+        Agar abhi bhi 1% gussa bacha hai, to ye padho:
+      </p>
+
+      <ul class="reasons-list">
+
+        <li>
+          🌸 <strong>Reason 1:</strong>
+          Gusse me tumhara BP badhega aur muje dukh hoga,
+          to smile karo!
+        </li>
+
+        <li>
+          🍕 <strong>Reason 2:</strong>
+          Treat ka offer unlimited time ke liye valid ho chuka hai.
+        </li>
+
+        <li>
+          🙈 <strong>Reason 3:</strong>
+          Maine dil se kaan pakad liye hain aur sach me guilty feel kar raha hu.
+        </li>
+
+        <li>
+          💌 <strong>Reason 4:</strong>
+          Humari purani yaadein is chhoti si ladai se 1000 guna badi hain.
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <!-- =========================
+         ONLY 2 UPLOADED PHOTOS
+    ========================== -->
+
+    <h3 class="section-heading">
+      📸 Best Memories 📸
+    </h3>
+
+    <p class="section-desc">
+      Kisi bhi photo par touch karo aur dekho andar kya likha hai ✨
+    </p>
+
+
+    <div class="gallery-grid">
+
+
+      <!-- PHOTO 1 -->
+
+      <div
+        class="photo-item"
+        onclick="openModal(1)">
+
+        <span class="photo-pin">
+          📍
+        </span>
+
+        <div class="photo-frame">
+
+          <img
+            src="photo1.jpg"
+            alt="Her Photo 1">
+
+        </div>
+
+        <div class="photo-caption">
+          Cutest Smile ✨
+        </div>
+
+        <div class="photo-hint">
+          Click karke padho 👆
+        </div>
+
+      </div>
+
+
+      <!-- PHOTO 2 -->
+
+      <div
+        class="photo-item"
+        onclick="openModal(2)">
+
+        <span class="photo-pin">
+          📍
+        </span>
+
+        <div class="photo-frame">
+
+          <img
+            src="photo2.jpg"
+            alt="Her Photo 2">
+
+        </div>
+
+        <div class="photo-caption">
+          Best Memories 💖
+        </div>
+
+        <div class="photo-hint">
+          Click karke padho 👆
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- MOOD METER -->
+
+    <div class="meter-box">
+
+      <div class="meter-title">
+        Abhi Gussa Kitna Bacha Hai? 🤔
+      </div>
+
+      <div class="meter-desc">
+        Apna current mood choose karo:
+      </div>
+
+      <div class="mood-buttons">
+
+        <button
+          class="mood-btn"
+          onclick="setMood('100% Gussa 😡')">
+          100% Gussa 😡
+        </button>
+
+        <button
+          class="mood-btn"
+          onclick="setMood('50% Thanda Hua 😐')">
+          50% Thanda Hua 😐
+        </button>
+
+        <button
+          class="mood-btn"
+          onclick="setMood('Thoda Sa Bacha Hai 🤏')">
+          Thoda Sa Bacha Hai 🤏
+        </button>
+
+        <button
+          class="mood-btn"
+          onclick="setMood('Poora Maaf Kar Diya 🥰')">
+          Poora Maaf Kar Diya 🥰
+        </button>
+
+      </div>
+
+      <div id="moodResult"></div>
+
+    </div>
+
+
+    <!-- FINAL LETTER -->
+
+    <div class="promise-letter">
+
+      <strong>
+        A Final Honest Promise 💌
+      </strong>
+
+      <br>
+      <br>
+
+      Dosti me thodi-bahut nok-jhok to chalti rehti hai,
+      par tumhare bina sach me sab adhoora aur sunsan lagta hai.
+
+      Tum meri sabse achhi dost ho aur main tumhe kisi bhi kimat par
+      khona nahi chahta.
+
+      Isliye ab saara gussa poori tarah bhula kar
+      jaldi se ek pyara sa message ya smile bhej do!
+
+      <br>
+      <br>
+
+      <strong>
+        Forever Friends! ❤️🤞
+      </strong>
+
+
+      <div class="treat-alert">
+
+        🎉 Congratulation!
+        You have unlocked 1 Free Pizza + Ice Cream from me! 🍕🍨
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PHOTO MODAL
+  ========================== -->
+
+  <div
+    id="photoModal"
+    onclick="closeModal()">
+
+    <div
+      class="modal-content"
+      onclick="event.stopPropagation()">
+
+      <img
+        id="modalImg"
+        src=""
+        alt="Photo">
+
+      <div class="modal-text-wrap">
+
+        <h3 id="modalTitle">
+          Special Message
+        </h3>
+
+        <p id="modalDesc">
+          Message content goes here...
+        </p>
+
+        <button
+          class="close-modal-btn"
+          onclick="closeModal()">
+          Close & Smile 😊
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* =========================
+       FLOATING EMOJIS
+    ========================== */
+
+    const floatingEmojiList = [
+      '🥺',
+      '😭',
+      '❤️',
+      '✨',
+      '🌸',
+      '🍕',
+      '🍫',
+      '💖',
+      '🙈'
+    ];
+
+    function spawnContinuousEmoji() {
+
+      const emoji = document.createElement('div');
+
+      emoji.classList.add('bg-emoji-floater');
+
+      emoji.innerText =
+        floatingEmojiList[
+          Math.floor(
+            Math.random() * floatingEmojiList.length
+          )
+        ];
+
+      emoji.style.left =
+        Math.random() * 94 + 3 + 'vw';
+
+      emoji.style.animationDuration =
+        (Math.random() * 3 + 4.5) + 's';
+
+      document.body.appendChild(emoji);
+
+      setTimeout(() => {
+        emoji.remove();
+      }, 8000);
+    }
+
+    setInterval(spawnContinuousEmoji, 600);
+
+
+    /* =========================
+       NO BUTTON
+    ========================== */
+
+    const persuasiveTexts = [
+
+      "Arey aise mat karo na please! 🥺",
+
+      "Kitna bhav khaogi? Maan bhi jao ab! 😭",
+
+      "Dekho kaan pakad liye maine! 👂🥺",
+
+      "Pizza khilaunga pakka, please maan jao! 🍕",
+
+      "Ab to button bhi nahi dabne dunga jab tak maaf na karo! 😂",
+
+      "Tere bina mera koi dost nahi hai yaar! 💔",
+
+      "Itna gussa sehat ke liye kharab hota hai! 😤",
+
+      "Maan ja na mere bhai/meri behen! ❤️"
+
+    ];
+
+    let textIndex = 0;
+    let yesScale = 1;
+
+
+    function dodgeNo() {
+
+      const btn =
+        document.getElementById('noBtn');
+
+      const yesBtn =
+        document.getElementById('yesBtn');
+
+      const text =
+        document.getElementById('dialogueText');
+
+      const emoji =
+        document.getElementById('trapEmoji');
+
+
+      const randomX =
+        Math.floor(Math.random() * 260) - 130;
+
+      const randomY =
+        Math.floor(Math.random() * 160) - 80;
+
+
+      btn.style.transform =
+        `translate(${randomX}px, ${randomY}px)`;
+
+
+      text.innerText =
+        persuasiveTexts[
+          textIndex % persuasiveTexts.length
+        ];
+
+      textIndex++;
+
+
+      yesScale += 0.12;
+
+      yesBtn.style.transform =
+        `scale(${yesScale})`;
+
+
+      const emojis = [
+        '😭',
+        '🥺',
+        '💔',
+        '🤕',
+        '😿'
+      ];
+
+      emoji.innerText =
+        emojis[
+          Math.floor(
+            Math.random() * emojis.length
+          )
+        ];
+
+    }
+
+
+    /* =========================
+       UNLOCK SCREEN TWO
+    ========================== */
+
+    function unlockScreenTwo() {
+
+      const s1 =
+        document.getElementById('screen-one');
+
+      const s2 =
+        document.getElementById('screen-two');
+
+
+      s1.style.opacity = '0';
+
+      s1.style.transform =
+        'scale(0.8)';
+
+
+      setTimeout(() => {
+
+        s1.style.display = 'none';
+
+        s2.style.display = 'block';
+
+
+        setTimeout(() => {
+
+          s2.style.opacity = '1';
+
+          s2.style.transform =
+            'translateY(0)';
+
+          triggerCelebration();
+
+          initScrollAnimation();
+
+        }, 50);
+
+      }, 700);
+
+    }
+
+
+    /* =========================
+       CONFETTI
+    ========================== */
+
+    function triggerCelebration() {
+
+      const duration = 3000;
+
+      const end =
+        Date.now() + duration;
+
+
+      const interval =
+        setInterval(function() {
+
+          if (Date.now() > end) {
+
+            clearInterval(interval);
+
+            return;
+          }
+
+
+          confetti({
+
+            particleCount: 50,
+
+            spread: 80,
+
+            origin: {
+              x: Math.random(),
+              y: Math.random() * 0.5 + 0.2
+            }
+
+          });
+
+        }, 250);
+
+    }
+
+
+    /* =========================
+       SCROLL ANIMATION
+    ========================== */
+
+    function initScrollAnimation() {
+
+      const cards =
+        document.querySelectorAll('.drama-card');
+
+
+      const observer =
+        new IntersectionObserver(
+
+          (entries) => {
+
+            entries.forEach(entry => {
+
+              if (entry.isIntersecting) {
+
+                entry.target.classList.add(
+                  'in-view'
+                );
+
+              }
+
+            });
+
+          },
+
+          {
+            threshold: 0.2
+          }
+
+        );
+
+
+      cards.forEach(card =>
+        observer.observe(card)
+      );
+
+    }
